@@ -1,14 +1,15 @@
-.welcome-container {
-    text-align: center;
-    margin-top: 50px;
-    font-family: Arial, sans-serif;
-  }
-  
-  h1 {
-    color: #4CAF50;
-  }
-  
-  p {
-    color: #555;
-    font-size: 20px;
-  }
+.sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav {
+  width: 250px;
+}
+
+.menu-item {
+  margin-left: 10px;
+}
+
+.active-link {
+  background-color: rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,54 @@
+.search-container {
+    text-align: center;
+    margin-top: 20px;
+    background-color: rgb(233, 200, 223);
+  }
+  
+  mat-form-field {
+    width: 300px;
+    margin-bottom: 20px;
+  }
+  
+  .results-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  mat-card {
+    width: 300px;
+    margin: 10px;
+    background-color: #e7bdd8;
+    color: white;
+  }
+  mat-card-header {
+    display: unset;
+  }
+  mat-card-title {
+    font-family: monospace;
+  }
+  
+  .image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    overflow: hidden;
+  }
+  
+  mat-spinner {
+    position: absolute;
+  }
+  
+  .breed-image {
+    display: block;
+    width: 200px;
+    height: 200px;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .breed-image.ng-lazyloaded {
+    opacity: 1;
+  }

@@ -1,14 +1,25 @@
-
-
-<main class="main">
-  <div class="content">
-    <div class="welcome-container">
-      <h1>Bienvenido a {{ title }}!</h1>
-      <p>Aplicación creada por {{ owner }}</p>
-    </div>
-  </div>
-</main>
-
-
-
-<router-outlet />
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" opened>
+      <mat-toolbar>Menu</mat-toolbar>
+      <mat-divider></mat-divider>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/welcome" routerLinkActive="active-link">
+          <mat-icon>home</mat-icon>
+          <span class="menu-item">Home</span>
+        </a>
+        <a mat-list-item routerLink="/search" routerLinkActive="active-link">
+          <mat-icon>search</mat-icon>
+          <span class="menu-item">Buscador</span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>Dog App</span>
+      </mat-toolbar>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
