@@ -3,9 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { Router } from '@angular/router';
 
 // Servicios
-import { DogService } from '../dog.service';
+import { DogService } from '../services/dog.service';
+import { BreedService } from '../services/breed.service';
 
 // Interfaces
 import { BreedWithImage } from '../models/breed.interface';
@@ -16,7 +18,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
 
 @Component({
   selector: 'app-breed-search',
@@ -31,7 +32,7 @@ export class BreedSearchComponent implements OnInit{
   searchQuery: string = '';
   filteredBreeds: BreedWithImage[] = [];
 
-  constructor(private dogService: DogService) { }
+  constructor(private dogService: DogService,private breedService: BreedService, private router: Router) { }
 
   ngOnInit(): void {
     this.dogService.getBreeds().subscribe(breeds => {
@@ -49,5 +50,10 @@ export class BreedSearchComponent implements OnInit{
     } else {
       this.filteredBreeds = this.breeds;
     }
+  }
+
+  viewBreedDetail(breed: any): void {
+    this.breedService.setSelectedBreed(breed);
+    this.router.navigate(['/breed', breed.breed]);
   }
 }

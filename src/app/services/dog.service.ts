@@ -4,7 +4,7 @@ import { Observable, forkJoin } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 // INTERFACES
-import { BreedImageResponse, BreedWithImage, BreedsResponse } from './models/breed.interface';
+import { BreedImageResponse, BreedWithImage, BreedsResponse } from '../models/breed.interface';
 @Injectable({
   providedIn: 'root'
 })

@@ -1,11 +1,11 @@
 <div class="search-container">
-  <mat-form-field >
+  <mat-form-field class="searcher">
     <mat-label>Buscar raza</mat-label>
     <input matInput [(ngModel)]="searchQuery" (ngModelChange)="onSearch()">
   </mat-form-field>
 
   <div class="results-container">
-    <mat-card *ngFor="let breed of filteredBreeds">
+    <mat-card *ngFor="let breed of filteredBreeds" (click)="viewBreedDetail(breed)">
       <mat-card-header>
         <mat-card-title>{{ breed.breed }}</mat-card-title>
         <mat-card-subtitle *ngIf="breed.subBreeds.length > 0">

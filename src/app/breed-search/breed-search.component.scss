@@ -1,14 +1,17 @@
-.mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: white
-}
-
-.search-container {
+  .search-container {
     text-align: center;
-    margin-top: 20px;
     background-color: rgb(233, 200, 223);
   }
-  
+  .searcher {
+    mat-label {
+      color:#7b1fa2;
+    }
+  }
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: rgb(233, 200, 223);
+  }
   mat-form-field {
+    
     width: 300px;
     margin-bottom: 20px;
   }
