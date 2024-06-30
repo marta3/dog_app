@@ -17,6 +17,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
+
 @Component({
   selector: 'app-breed-search',
   standalone: true,
@@ -26,26 +27,27 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
   providers: [DogService]
 })
 export class BreedSearchComponent implements OnInit{
-    breedsWithImages: BreedWithImage[] = [];
-    filteredBreedsWithImages: BreedWithImage[] = [];
-    searchQuery: string = '';
-  
-    constructor(private dogService: DogService) {}
-  
-    ngOnInit(): void {
-      this.dogService.getBreedsWithImages().subscribe(data => {
-        this.breedsWithImages = data;
-        this.filteredBreedsWithImages = this.breedsWithImages;
-      });
-    }
-  
-    onSearch() {
-      this.filteredBreedsWithImages = this.breedsWithImages.filter(breedWithImage =>
-        breedWithImage.breed.toLowerCase().includes(this.searchQuery.toLowerCase())
+  breeds: BreedWithImage[] = [];
+  searchQuery: string = '';
+  filteredBreeds: BreedWithImage[] = [];
+
+  constructor(private dogService: DogService) { }
+
+  ngOnInit(): void {
+    this.dogService.getBreeds().subscribe(breeds => {
+      this.breeds = breeds;
+      this.filteredBreeds = breeds;
+    });
+  }
+
+  onSearch(): void {
+    if (this.searchQuery) {
+      this.filteredBreeds = this.breeds.filter(breed =>
+        breed.breed.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        breed.subBreeds.some(subBreed => subBreed.toLowerCase().includes(this.searchQuery.toLowerCase()))
       );
-    }
-  
-    onImageLoad(breedWithImage: BreedWithImage) {
-      breedWithImage.loading = false;
+    } else {
+      this.filteredBreeds = this.breeds;
     }
   }
+}

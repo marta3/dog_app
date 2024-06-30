@@ -1,9 +1,13 @@
-export interface BreedWithImage {
-  breed: string;
-  image: string;
-  loading: boolean;
+export interface BreedsResponse {
+  message: { [key: string]: string[] };
 }
 
-export interface BreedList {
+export interface BreedImageResponse {
+  message: string;
+}
 
+export interface BreedWithImage {
+  breed: string;
+  subBreeds: string[];
+  image: string;
 }

@@ -1,31 +1,19 @@
 <div class="search-container">
-    <h1>Buscador de Razas de Perros</h1>
-    <mat-form-field appearance="outline">
-      <mat-label>Buscar raza de perro</mat-label>
-      <input
-        matInput
-        type="text"
-        [(ngModel)]="searchQuery"
-        (input)="onSearch()"
-      />
-    </mat-form-field>
-      </div>
-    <div class="results-container">
-      <mat-card *ngFor="let breedWithImage of filteredBreedsWithImages">
-        <mat-card-header>
-          <mat-card-title>{{ breedWithImage.breed }}</mat-card-title>
-        </mat-card-header>
-        <div class="image-container">
-          <mat-spinner *ngIf="breedWithImage.loading" diameter="50"></mat-spinner>
-          <img
-            mat-card-image
-            [src]="breedWithImage.image"
-            alt="{{ breedWithImage.breed }}"
-            (load)="onImageLoad(breedWithImage)"
-            class="breed-image"
-          />
-        </div>
-      </mat-card>
-    </div>
+  <mat-form-field >
+    <mat-label>Buscar raza</mat-label>
+    <input matInput [(ngModel)]="searchQuery" (ngModelChange)="onSearch()">
+  </mat-form-field>
 
+  <div class="results-container">
+    <mat-card *ngFor="let breed of filteredBreeds">
+      <mat-card-header>
+        <mat-card-title>{{ breed.breed }}</mat-card-title>
+        <mat-card-subtitle *ngIf="breed.subBreeds.length > 0">
+          Subrazas: {{ breed.subBreeds.join(', ') }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="breed.image" alt="{{ breed.breed }}" class="breed-image">
+    </mat-card>
+  </div>
+</div>
   
