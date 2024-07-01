@@ -1,27 +1,92 @@
-# DogApp
+Introducción
+Este proyecto es una aplicación Angular diseñada para buscar y mostrar razas de perros. Utiliza servicios para obtener los datos de las razas y componentes para presentar esta información al usuario.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.4.
+Instalación
+Sigue estos pasos para configurar el proyecto en tu entorno local:
 
-## Development server
+Clona el repositorio:
+git clone https://github.com/tu-usuario/tu-repositorio.git
+cd tu-repositorio
+Instala las dependencias:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+npm install
+Inicia el servidor de desarrollo:
 
-## Code scaffolding
+ng serve
+La aplicación estará disponible en http://localhost:4200.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Estructura del Proyecto
+La estructura básica del proyecto es la siguiente:
 
-## Build
+src/
+|-- app/
+|   |-- breed-search/
+|   |   |-- breed-search.component.ts
+|   |   |-- breed-search.component.html
+|   |   |-- breed-search.component.scss
+|   |   |-- breed-search.component.spec.ts
+|   |-- services/
+|   |   |-- dog.service.ts
+|   |   |-- breed.service.ts
+|   |-- models/
+|   |   |-- breed.interface.ts
+|-- assets/
+|-- environments/
+|-- styles.scss
+|-- index.html
+|-- main.ts
+Componentes Principales
+BreedSearchComponent
+Este componente es responsable de buscar y mostrar las razas de perros. Aquí se realiza la llamada al DogService para obtener la lista de razas.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Métodos Importantes
+ngOnInit(): Se llama al inicializar el componente y obtiene las razas de perros mediante DogService.
+typescript
+Copiar código
+ngOnInit(): void {
+  this.dogService.getBreeds().subscribe(breeds => {
+    this.breeds = breeds;
+    this.filteredBreeds = breeds;
+  });
+}
+Servicios
+DogService
+Este servicio se encarga de obtener los datos de las razas de perros desde una API externa.
 
-## Running unit tests
+Métodos Importantes
+getBreeds(): Devuelve un observable con la lista de razas de perros.
+getBreeds(): Observable<Breed[]> {
+  return this.http.get<Breed[]>(this.apiUrl);
+}
+BreedService
+Este servicio gestiona la raza seleccionada por el usuario.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Métodos Importantes
+setSelectedBreed(breed: Breed): Establece la raza seleccionada.
 
-## Running end-to-end tests
+setSelectedBreed(breed: Breed): void {
+  this.selectedBreed = breed;
+}
+Ejecución de Tests
+Para ejecutar los tests del proyecto, utiliza el siguiente comando:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+ng test
+Este comando ejecutará los tests definidos en el proyecto y mostrará los resultados en la consola.
 
-## Further help
+Test de BreedSearchComponent
+El test verifica que el método getBreeds del DogService se llama correctamente y que las razas obtenidas se asignan a las propiedades breeds y filteredBreeds.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+it('should fetch and set breeds correctly', () => {
+  const mockBreeds = [
+    { breed: 'hound', image: 'https://example.com/hound.jpg', subBreeds: [] },
+    { breed: 'pug', image: 'https://example.com/pug.jpg', subBreeds: [] }
+  ];
+  
+  dogService.getBreeds.and.returnValue(of(mockBreeds));
+  component.ngOnInit();
+  fixture.detectChanges();
+  
+  expect(dogService.getBreeds).toHaveBeenCalled();
+  expect(component.breeds).toEqual(mockBreeds);
+  expect(component.filteredBreeds).toEqual(mockBreeds);
+});
