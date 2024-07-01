@@ -39,6 +39,7 @@ export class BreedSearchComponent implements OnInit{
       this.breeds = breeds;
       this.filteredBreeds = breeds;
     });
+    console.log(this.breeds.length);
   }
 
   onSearch(): void {

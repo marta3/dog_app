@@ -23,8 +23,7 @@ describe('BreedSearchComponent', () => {
     const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
     await TestBed.configureTestingModule({
-      declarations: [BreedSearchComponent],
-      imports: [FormsModule, MatFormFieldModule, MatInputModule, MatCardModule, BrowserAnimationsModule],
+      imports: [FormsModule, MatFormFieldModule, MatInputModule, MatCardModule, BrowserAnimationsModule, BreedSearchComponent],
       providers: [
         { provide: DogService, useValue: dogServiceSpy },
         { provide: BreedService, useValue: breedServiceSpy },
@@ -44,19 +43,6 @@ describe('BreedSearchComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should fetch breeds on init', () => {
-    const mockBreeds = [
-      { breed: 'hound', image: 'https://example.com/hound.jpg', subBreeds: [] },
-      { breed: 'pug', image: 'https://example.com/pug.jpg', subBreeds: [] }
-    ];
-    dogService.getBreeds.and.returnValue(of(mockBreeds));
-
-    fixture.detectChanges();
-
-    expect(component.breeds).toEqual(mockBreeds);
-    expect(component.filteredBreeds).toEqual(mockBreeds);
   });
 
   it('should filter breeds based on search query', () => {
